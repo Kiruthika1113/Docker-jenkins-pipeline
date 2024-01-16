@@ -43,9 +43,7 @@ post{
             subject: "rollback from jenkins",
             body: "rollback"
         }
-}
-}
-    
+   
 
   
 
