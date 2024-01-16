@@ -23,14 +23,25 @@ pipeline {
     }
     
   }
+   stage('Rollback') {
+      steps {
+        // Rollback to the previous version
+        sh "docker pull $ROLLBACK_IMAGE"
+        sh "docker tag $ROLLBACK_IMAGE my-flask"
+        // You may need additional steps based on your deployment strategy
+        // For example, restart the application, clear caches, etc.
+      }
+    }
+  }
+
 
 post{
       always{
             sh 'docker rm -f mypycont'
             sh 'docker run --name mypycont -d -p 3000:5000 my-flask'
             mail to: "kiruthikashanmugam23@gmail.com",
-            subject: "Notification mail from jenkins",
-            body: "CiCd pipeline"
+            subject: "rollback from jenkins",
+            body: "rollback"
         }
 }
 
