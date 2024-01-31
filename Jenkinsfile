@@ -31,16 +31,6 @@ pipeline {
                 }
             }
         }
-        stage('Rollback') {
-            steps {
-                // Rollback to the previous version
-                sh "docker pull $ROLLBACK_IMAGE"
-                sh "docker tag $ROLLBACK_IMAGE kiruthika1113my-flask:previous"
-                // You may need additional steps based on your deployment strategy
-                // For example, restart the application, clear caches, etc.
-            }
-        }
-    }
 
     post {
         always {
